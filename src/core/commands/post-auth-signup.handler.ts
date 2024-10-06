@@ -8,8 +8,8 @@ export class PostAuthSignupHandler {
     constructor(private readonly responseService: ResponseService) {}
 
     public execute() {
-        return this.responseService.getOkResponse({
-            message: "ok"
+        return this.responseService.getCreatedResponse({
+            message: "user has been successfully signed up"
         });
     }
 }
