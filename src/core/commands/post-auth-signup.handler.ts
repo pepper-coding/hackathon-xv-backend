@@ -7,7 +7,7 @@ import { ResponseService } from "@core/services/response.service";
 export class PostAuthSignupHandler {
     constructor(private readonly responseService: ResponseService) {}
 
-    public execute() {
+    public execute(command: PostAuthSignupCommand) {
         return this.responseService.getCreatedResponse({
             message: "User has been successfully signed up"
         });

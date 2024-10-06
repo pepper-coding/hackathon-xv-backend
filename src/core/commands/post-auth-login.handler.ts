@@ -7,7 +7,7 @@ import { ResponseService } from "@core/services/response.service";
 export class PostAuthLoginHandler {
     constructor(private readonly responseService: ResponseService) {}
 
-    public execute() {
+    public execute(command: PostAuthLoginCommand) {
         return this.responseService.getOkResponse({
             message: "User has been successfully logged in"
         });

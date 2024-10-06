@@ -1,5 +1,5 @@
-import { Controller, HttpCode, Post } from "@nestjs/common";
 import { ApiTags, ApiCreatedResponse, ApiOkResponse, ApiBody } from "@nestjs/swagger";
+import { Controller, HttpCode, Post, Body } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 
 import { PostAuthSignupCommand } from "@common/commands/post-auth-signup.command";
@@ -17,15 +17,15 @@ export class AuthController {
     @ApiBody({ type: PostAuthSignupBodyDto, description: "Post auth signup body", required: true })
     @HttpCode(ResponseStatusEnum.CREATED)
     @Post("/signup")
-    public async postAuthSignup() {
-        return await this.commandBus.execute(new PostAuthSignupCommand());
+    public async postAuthSignup(@Body() body: PostAuthSignupBodyDto) {
+        return await this.commandBus.execute(new PostAuthSignupCommand(body));
     }
 
     @ApiOkResponse({ description: "User has been successfully logged in" })
     @ApiBody({ type: PostAuthLoginBodyDto, description: "Post auth login body", required: true })
     @HttpCode(ResponseStatusEnum.OK)
     @Post("/login")
-    public async postAuthLogin() {
-        return await this.commandBus.execute(new PostAuthLoginCommand());
+    public async postAuthLogin(@Body() body: PostAuthLoginBodyDto) {
+        return await this.commandBus.execute(new PostAuthLoginCommand(body));
     }
 }
