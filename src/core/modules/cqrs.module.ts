@@ -2,6 +2,7 @@ import { CqrsModule as NestCqrsModule } from "@nestjs/cqrs";
 import { Global, Module } from "@nestjs/common";
 
 import { PostAuthSignupHandler } from "@core/commands/post-auth-signup.handler";
+import { PostAuthLoginHandler } from "@core/commands/post-auth-login.handler";
 import { GetAppIndexHandler } from "@core/queries/get-app-index.handler";
 
 @Global()
@@ -11,6 +12,7 @@ import { GetAppIndexHandler } from "@core/queries/get-app-index.handler";
     ],
     providers: [
         PostAuthSignupHandler,
+        PostAuthLoginHandler,
         GetAppIndexHandler
     ]
 })
