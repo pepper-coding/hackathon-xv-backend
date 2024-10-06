@@ -9,7 +9,7 @@ export class PostAuthSignupHandler {
 
     public execute() {
         return this.responseService.getCreatedResponse({
-            message: "user has been successfully signed up"
+            message: "User has been successfully signed up"
         });
     }
 }

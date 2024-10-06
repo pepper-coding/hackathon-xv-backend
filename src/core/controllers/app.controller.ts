@@ -10,7 +10,7 @@ import { GetAppIndexQuery } from "@common/queries/get-app-index.query";
 export class AppController {
     constructor(private readonly queryBus: QueryBus) {}
 
-    @ApiOkResponse({ description: "everything is good" })
+    @ApiOkResponse({ description: "Everything is good" })
     @HttpCode(ResponseStatusEnum.OK)
     @Get("/")
     public async getAppIndex() {

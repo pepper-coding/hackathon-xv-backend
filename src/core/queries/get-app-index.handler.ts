@@ -9,7 +9,7 @@ export class GetAppIndexHandler {
 
     public execute() {
         return this.responseService.getOkResponse({
-            message: "everything is good"
+            message: "Everything is good"
         });
     }
 }
