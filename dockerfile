@@ -8,6 +8,10 @@ COPY ./package.json ./package.json
 
 RUN npm install
 
+COPY ./prisma ./prisma
+
+RUN npm run generate
+
 COPY ./src ./src
 
 COPY ./tsconfig.json ./tsconfig.json

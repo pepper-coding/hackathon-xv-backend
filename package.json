@@ -5,6 +5,7 @@
         "migrate:dev": "prisma migrate dev",
         "start:prod": "node ./dist/main.js",
         "start:dev": "nest start --watch",
+        "generate": "prisma generate",
         "build": "nest build",
         "lint": "eslint ./src/**/*.ts --fix"
     },
