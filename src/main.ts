@@ -16,9 +16,11 @@ async function bootstrap() {
     
     const config = app.get(ConfigService);
 
+    const host = config.getAppHost();
+
     const port = config.getAppPort();
 
-    return await app.listen(port, "0.0.0.0");
+    return await app.listen(port, host);
 }
 
 bootstrap();

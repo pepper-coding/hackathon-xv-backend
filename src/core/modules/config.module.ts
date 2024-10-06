@@ -10,6 +10,7 @@ import { ConfigService } from "@core/services/config.service";
     imports: [
     	NestConfigModule.forRoot({
             validationSchema: joi.object({
+                APP_HOST: joi.string().required(),
                 APP_PORT: joi.number().required()
             })
         })
