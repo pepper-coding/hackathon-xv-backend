@@ -1,0 +1,75 @@
+datasource Database {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator Client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    login       String   @map("login")                        @unique
+    internal_id String   @map("internal_id") @default(uuid()) @id
+    external_id String   @map("external_id") @default(uuid()) @unique
+
+    session     Session?                                      
+    password    Password?
+
+    created_at  DateTime @map("created_at")  @default(now())
+    updated_at  DateTime @map("updated_at")  @default(now())  @updatedAt
+
+    @@map("user")
+}
+
+model Password {
+    user_id     String   @map("user_id")                      @unique
+    password    String   @map("password")                     @unique
+    internal_id String   @map("internal_id") @default(uuid()) @id
+
+    user        User                                          @relation(fields: [user_id], references: [internal_id])
+
+    created_at  DateTime @map("created_at")  @default(now())
+    updated_at  DateTime @map("updated_at")  @default(now())  @updatedAt
+
+    @@map("password")
+}
+
+model Session {
+    user_id     String   @map("user_id")                      @unique
+    internal_id String   @map("internal_id") @default(uuid()) @id
+
+    user        User                                          @relation(fields: [user_id], references: [internal_id])
+    access      Access?
+    refresh     Refresh?
+
+    created_at  DateTime @map("created_at")  @default(now())
+    updated_at  DateTime @map("updated_at")  @default(now())  @updatedAt
+
+    @@map("session")
+}
+
+model Access {
+    access      String   @map("access")                       @unique
+    session_id  String   @map("session_id")                   @unique
+    internal_id String   @map("internal_id") @default(uuid()) @id
+
+    session     Session                                       @relation(fields: [session_id], references: [internal_id])
+
+    created_at  DateTime @map("created_at")  @default(now())
+    updated_at  DateTime @map("updated_at")  @default(now())  @updatedAt
+
+    @@map("access")
+}
+
+model Refresh {
+    refresh     String   @map("refresh")                      @unique
+    session_id  String   @map("session_id")                   @unique
+    internal_id String   @map("internal_id") @default(uuid()) @id
+
+    session     Session                                       @relation(fields: [session_id], references: [internal_id])
+
+    created_at  DateTime @map("created_at")  @default(now())
+    updated_at  DateTime @map("updated_at")  @default(now())  @updatedAt
+
+    @@map("refresh")
+}

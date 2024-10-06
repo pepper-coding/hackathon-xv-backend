@@ -1,0 +1,18 @@
+services:
+  backend:
+    container_name: backend
+    restart: always
+    image: backend
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      APP_PORT: ${APP_PORT}
+    networks:
+      - postgres
+      - backend
+    ports:
+      - 8000:8000
+networks:
+  postgres:
+    external: true
+  backend:
+    name: backend
